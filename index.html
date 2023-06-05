@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+		<link rel="modulepreload" href="./_app/immutable/entry/start.502cb2da.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index.6dba6488.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.b49a5ea7.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/paths.95d5b226.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/app.04bc4b81.js">
+		<link rel="modulepreload" href="./_app/immutable/nodes/0.6e67e459.js">
+		<link rel="modulepreload" href="./_app/immutable/nodes/2.f4d16900.js">
+  </head>
+  <body>
+    <div>
+
+
+<h1>sveltekit-gh-pages</h1>
+<p>Deployed to GitHub Pages</p>
+<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation
+</p>
+<a href="/verse-and-verve/about">About</a>
+
+
+			
+			<script>
+				{
+					__sveltekit_1hlee4d = {
+						assets: "/verse-and-verve",
+						base: new URL(".", location).pathname.slice(0, -1),
+						env: {}
+					};
+
+					const element = document.currentScript.parentElement;
+
+					const data = [null,null];
+
+					Promise.all([
+						import("./_app/immutable/entry/start.502cb2da.js"),
+						import("./_app/immutable/entry/app.04bc4b81.js")
+					]).then(([kit, app]) => {
+						kit.start(app, element, {
+							node_ids: [0, 2],
+							data,
+							form: null,
+							error: null
+						});
+					});
+				}
+			</script>
+		</div>
+  </body>
+</html>
