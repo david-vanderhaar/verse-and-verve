@@ -1,0 +1,7 @@
+title: Example Text
+created: 2023-08-28
+END_METADATA
+
+Wow, what an Example
+this
+is
