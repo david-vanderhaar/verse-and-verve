@@ -30,17 +30,29 @@
     };
   }
 
+  function sortByDateLatest(poems) {
+    return poems.sort((a, b) => {
+      const aDate = new Date(a.metadata?.created);
+      const bDate = new Date(b.metadata?.created);
+      return bDate - aDate;
+    });
+  }
+
   async function fetchTestPoems() {
     const urls = [
       `${base}/texts/example.txt`,
       `${base}/texts/example2.txt`,
+      `${base}/texts/example3.txt`,
+      `${base}/texts/example4.txt`,
     ]
     
     const poemPromises = urls.map(
       (url) => parsePoemResponse(url)
     );
 
-    poems = await Promise.all(poemPromises);
+    
+    const result = await Promise.all(poemPromises);
+    poems = sortByDateLatest(result);
   }
   
   async function fetchPoems() {
@@ -50,7 +62,8 @@
       .filter(filterTxtFiles)
       .map((item) => parsePoemResponse(item.download_url));
 
-    poems = await Promise.all(poemPromises);
+    const result = await Promise.all(poemPromises);
+    poems = sortByDateLatest(result);
   }
 
   function filterTxtFiles(file) {
