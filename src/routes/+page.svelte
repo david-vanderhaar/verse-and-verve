@@ -1,6 +1,7 @@
 <script>
   import { onMount } from 'svelte';
   import { base } from '$app/paths';
+  import Scroller from '@sveltejs/svelte-scroller';
 
   const PRODUCTION_MODE = process.env.NODE_ENV === 'production';
   const POEM_ENDPOINT = 'https://api.github.com/repos/david-vanderhaar/verse-and-verve-data/contents/poems?ref=main';
@@ -75,27 +76,62 @@
     const poemText = await poemResponse.text();
     return parseText(poemText);
   }
+
+  let count;
+	let index;
+	let progress;
+
+  $: poemsLoaded = poems.length > 0;
+  $: currentPoem = poems[index]?.metadata?.title || '';
+
 </script>
 
-{#if poems.length > 0}
-  {#each poems as poem}
-    <article>
-      <p class="title">{poem.metadata?.title || ''}</p>
-      <div class="date">{poem.metadata?.created || ''}</div>
-      <p class="content">{poem.content}</p>
-    </article>
-  {/each}
+{#if poemsLoaded}
+  <Scroller
+    top=0.1
+    threshold=0.5
+    bottom=0.9
+    query="article"
+    bind:count
+    bind:index
+    bind:progress
+  >
+    <div slot="background">
+      index: {index}
+      poem: {currentPoem}
+      progress: {progress}
+    </div>
+    <div slot="foreground">
+      {#each poems as poem}
+        <article>
+          <p class="title">{poem.metadata?.title || ''}</p>
+          <div class="date">{poem.metadata?.created || ''}</div>
+          <p class="content">{poem.content}</p>
+        </article>
+      {/each}
+    </div>
+  </Scroller>
 {:else}
-<p>...</p>
+  <p>...</p>
 {/if}
 
 <style>
+  [slot="background"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    transform: translate(-300px, 0); /* remove */
+    background-color: #fff;
+    z-index: 1;
+  }
   p {
     white-space: pre-wrap;
   }
 
   article {
-    margin-bottom: 4rem;
+    width: 300px;
+    height: 50vh;
   }
 
   .title {
