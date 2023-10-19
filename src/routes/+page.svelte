@@ -88,7 +88,7 @@
 
 {#if poemsLoaded}
   <Scroller
-    top=0.1
+    top=0
     threshold=0.5
     bottom=0.9
     query="article"
@@ -121,9 +121,14 @@
     top: 0;
     left: 0;
     right: 0;
-    transform: translate(-300px, 0); /* remove */
     background-color: #fff;
     z-index: 1;
+    width: 50%;
+    height: calc(100vh - 30px)
+  }
+
+  [slot="foreground"] {
+    padding-left: 50%;
   }
   p {
     white-space: pre-wrap;

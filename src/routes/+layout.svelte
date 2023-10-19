@@ -12,7 +12,7 @@
   <slot></slot>
 </main>
 <footer>
-  <p class="italic">David Vanderhaar - {year}</p>
+  <div class="italic">David Vanderhaar - {year}</div>
 </footer>
 
 <style>
@@ -25,26 +25,6 @@
   }
 
   header, footer {
-    text-align: left;
-  }
-
-  main, header, footer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  /* left align everything on mobile */
-  @media (max-width: 600px) {
-    header, footer {
-      text-align: left;
-    }
-
-    main, header, footer {
-      align-items: flex-start;
-      margin-left: 1rem;
-      margin-left: 1rem;
-    }
-
+    text-align: center;
   }
 </style>
