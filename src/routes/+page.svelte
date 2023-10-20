@@ -6,9 +6,11 @@
   const PRODUCTION_MODE = process.env.NODE_ENV === 'production';
   const POEM_ENDPOINT = 'https://api.github.com/repos/david-vanderhaar/verse-and-verve-data/contents/poems?ref=main';
 
+  let rootDocument;
   let poems = [];
 
   onMount(() => {
+    rootDocument = document.documentElement;
     if (PRODUCTION_MODE) fetchPoems();
     else fetchTestPoems();
   });
@@ -82,7 +84,12 @@
 	let progress;
 
   $: poemsLoaded = poems.length > 0;
-  $: currentPoem = poems[index]?.metadata?.title || '';
+  $: currentPoem = poems[index];
+  $: currentPoemTitle = currentPoem?.metadata?.title || '';
+  $: currentPoemColor = currentPoem?.metadata?.color || '#eadcbd';
+  
+  // update background color with current poem color
+  $: rootDocument?.style.setProperty('--background-color', currentPoemColor);
 
 </script>
 
@@ -98,12 +105,12 @@
   >
     <div slot="background">
       index: {index}
-      poem: {currentPoem}
+      poem: {currentPoemTitle}
       progress: {progress}
     </div>
     <div slot="foreground">
-      {#each poems as poem}
-        <article>
+      {#each poems as poem, i}
+        <article class:viewed={i === index}>
           <p class="title">{poem.metadata?.title || ''}</p>
           <div class="date">{poem.metadata?.created || ''}</div>
           <p class="content">{poem.content}</p>
@@ -117,34 +124,43 @@
 
 <style>
   [slot="background"] {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    background-color: #fff;
-    z-index: 1;
-    width: 50%;
-    height: calc(100vh - 30px)
+    display: none;
   }
-
   [slot="foreground"] {
-    padding-left: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   p {
     white-space: pre-wrap;
   }
 
   article {
+    margin-bottom: 2rem;
     width: 300px;
-    height: 50vh;
+    min-height: 50vh;
+    opacity: 0.5;
+    transition: all 0.5s ease-in-out;
+  }
+
+  .viewed {
+    opacity: 1;
   }
 
   .title {
     font-weight: bold;
     margin-bottom: 0;
+    font-family: sans-serif;
+  }
+
+  .content {
+    font-family: serif;
+    font-size: 1rem;
+    font-size: 1.5rem;
   }
 
   .date {
     font-style: italic;
+    font-family: sans-serif;
   }
 </style>
