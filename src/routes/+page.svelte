@@ -47,6 +47,7 @@
       `${base}/texts/example2.txt`,
       `${base}/texts/example3.txt`,
       `${base}/texts/example4.txt`,
+      `${base}/texts/example5.txt`,
     ]
     
     const poemPromises = urls.map(
@@ -83,9 +84,13 @@
 	let index;
 	let progress;
 
+  function getTitle(poem) {
+    return poem?.metadata?.title || poem?.metadata?.created || '';
+  }
+
   $: poemsLoaded = poems.length > 0;
   $: currentPoem = poems[index];
-  $: currentPoemTitle = currentPoem?.metadata?.title || '';
+  $: currentPoemTitle = getTitle(currentPoem);
   $: currentPoemColor = currentPoem?.metadata?.color || '#eadcbd';
   
   // update background color with current poem color
@@ -111,8 +116,10 @@
     <div slot="foreground">
       {#each poems as poem, i}
         <article class:viewed={i === index}>
-          <p class="title">{poem.metadata?.title || ''}</p>
-          <div class="date">{poem.metadata?.created || ''}</div>
+          <p class="title">{getTitle(poem)}</p>
+          {#if poem?.metadata?.title !== undefined}
+            <div class="date">{poem.metadata?.created || ''}</div>
+          {/if}
           <p class="content">{poem.content}</p>
         </article>
       {/each}
@@ -139,7 +146,7 @@
     margin-bottom: 2rem;
     width: 300px;
     min-height: 50vh;
-    opacity: 0.5;
+    opacity: 0.3;
     transition: all 0.5s ease-in-out;
   }
 
@@ -148,19 +155,19 @@
   }
 
   .title {
+    /* font-family: 'Cormorant Variable', serif; */
+    font-size: 2rem;
     font-weight: bold;
     margin-bottom: 0;
-    font-family: sans-serif;
   }
 
   .content {
-    font-family: serif;
-    font-size: 1rem;
+    /* font-family: 'Cormorant Variable', serif; */
     font-size: 1.5rem;
   }
 
   .date {
     font-style: italic;
-    font-family: sans-serif;
+    /* font-family: 'Cormorant Variable', serif; */
   }
 </style>

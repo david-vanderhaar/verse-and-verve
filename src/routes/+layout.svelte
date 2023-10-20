@@ -1,5 +1,5 @@
 <script>
-  import { base } from "$app/paths";
+  import "@fontsource-variable/cormorant";
   const year = new Date().getFullYear();
 </script>
 
@@ -16,11 +16,16 @@
 </footer>
 
 <style>
+  :global(html) {
+    font-family: 'Cormorant Variable', serif;
+  }
+
   .italic {
     font-style: italic;
   }
 
   header {
+    /* font-family: 'Cormorant Variable', serif; */
     margin-bottom: 2rem;
   }
 
