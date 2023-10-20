@@ -1,7 +1,14 @@
-title: Example Text
+title: With a really long line
 created: 2023-08-28
+color: #9dc3d3
 END_METADATA
 
-Wow, what an Example
-this
-is
+First the breeze came
+Like a prophecy.
+We all expected it, but
+it's arrival wasn't 
+less a miracle.
+
+and here is a repeatingly long line and here is a repeatingly long line and here is a repeatingly long line and here is a repeatingly long line and here is a repeatingly long line and here is a repeatingly long line
+
+see?

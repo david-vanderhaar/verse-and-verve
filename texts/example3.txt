@@ -1,8 +1,5 @@
-title: Example Two
+title: a really short poem
 created: 2021-02-28
 END_METADATA
 
-Wow, what an example
-this
-is
-not
+Wow

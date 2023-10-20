@@ -4,17 +4,17 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     
-		<link rel="modulepreload" href="/verse-and-verve/_app/immutable/entry/start.cd7c8b82.js">
-		<link rel="modulepreload" href="/verse-and-verve/_app/immutable/chunks/index.7a006170.js">
-		<link rel="modulepreload" href="/verse-and-verve/_app/immutable/chunks/singletons.799add8d.js">
-		<link rel="modulepreload" href="/verse-and-verve/_app/immutable/chunks/paths.52b972b0.js">
-		<link rel="modulepreload" href="/verse-and-verve/_app/immutable/entry/app.299c4e5a.js">
+		<link rel="modulepreload" href="/verse-and-verve/_app/immutable/entry/start.6d4f78be.js">
+		<link rel="modulepreload" href="/verse-and-verve/_app/immutable/chunks/index.d7fd8aed.js">
+		<link rel="modulepreload" href="/verse-and-verve/_app/immutable/chunks/singletons.2f588672.js">
+		<link rel="modulepreload" href="/verse-and-verve/_app/immutable/chunks/paths.29c61809.js">
+		<link rel="modulepreload" href="/verse-and-verve/_app/immutable/entry/app.40d55b87.js">
   </head>
   <body>
     <div>
 			<script>
 				{
-					__sveltekit_1lez1zm = {
+					__sveltekit_1dg2cig = {
 						assets: "/verse-and-verve",
 						base: "/verse-and-verve",
 						env: {}
@@ -23,8 +23,8 @@
 					const element = document.currentScript.parentElement;
 
 					Promise.all([
-						import("/verse-and-verve/_app/immutable/entry/start.cd7c8b82.js"),
-						import("/verse-and-verve/_app/immutable/entry/app.299c4e5a.js")
+						import("/verse-and-verve/_app/immutable/entry/start.6d4f78be.js"),
+						import("/verse-and-verve/_app/immutable/entry/app.40d55b87.js")
 					]).then(([kit, app]) => {
 						kit.start(app, element);
 					});
@@ -33,8 +33,12 @@
 		</div>
   </body>
   <style>
+    :root {
+      ---background-color: #eadcbd;
+    }
     html {
-      background-color: #eadcbd;
+      background-color: var(--background-color);
+      transition: all 0.5s ease;
     }
   </style>
 </html>
