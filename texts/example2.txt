@@ -1,5 +1,7 @@
 title: a really tall poem
 created: 2023-02-28
+color: #262422
+text_color: #eadcbd
 END_METADATA
 
 this
