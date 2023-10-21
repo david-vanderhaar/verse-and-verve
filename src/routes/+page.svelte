@@ -92,9 +92,11 @@
   $: currentPoem = poems[index];
   $: currentPoemTitle = getTitle(currentPoem);
   $: currentPoemColor = currentPoem?.metadata?.color || '#eadcbd';
+  $: currentPoemTextColor = currentPoem?.metadata?.text_color || '#262422';
   
   // update background color with current poem color
   $: rootDocument?.style.setProperty('--background-color', currentPoemColor);
+  $: rootDocument?.style.setProperty('--text-color', currentPoemTextColor);
 
 </script>
 
@@ -148,6 +150,7 @@
     min-height: 50vh;
     opacity: 0.3;
     transition: all 0.5s ease-in-out;
+    transition: color 0.1s ease-in-out;
   }
 
   .viewed {
@@ -155,19 +158,16 @@
   }
 
   .title {
-    /* font-family: 'Cormorant Variable', serif; */
     font-size: 2rem;
     font-weight: bold;
     margin-bottom: 0;
   }
 
   .content {
-    /* font-family: 'Cormorant Variable', serif; */
     font-size: 1.5rem;
   }
 
   .date {
     font-style: italic;
-    /* font-family: 'Cormorant Variable', serif; */
   }
 </style>

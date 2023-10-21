@@ -1,5 +1,6 @@
 title: a really short poem
 created: 2021-02-28
+color: #ebd66b
 END_METADATA
 
 Wow
