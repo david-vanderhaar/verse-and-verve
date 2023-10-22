@@ -2,6 +2,8 @@
   import { onMount } from 'svelte';
   import { base } from '$app/paths';
   import Scroller from '@sveltejs/svelte-scroller';
+  import TableOfContents from '../components/TableOfContents.svelte';
+    import { get } from 'svelte/store';
 
   const PRODUCTION_MODE = process.env.NODE_ENV === 'production';
   const POEM_ENDPOINT = 'https://api.github.com/repos/david-vanderhaar/verse-and-verve-data/contents/poems?ref=main';
@@ -88,6 +90,20 @@
     return poem?.metadata?.title || poem?.metadata?.created || '';
   }
 
+  function getTableOfContentsDisplay(poem) {
+    const name = poem?.metadata?.title || null;
+    const date = poem?.metadata?.created || null;
+    return [date, name].filter((item) => item !== null).join(' - ');
+  }
+
+  function getPoemTarget(poem) {
+    return getTitle(poem).toLowerCase().replace(/ /g, '-');
+  }
+
+  function getTableOfContents(poems) {
+    return poems.map((poem) => ({displayName: getTableOfContentsDisplay(poem), target: getPoemTarget(poem)}));
+  }
+
   $: poemsLoaded = poems.length > 0;
   $: currentPoem = poems[index];
   $: currentPoemTitle = getTitle(currentPoem);
@@ -98,9 +114,12 @@
   $: rootDocument?.style.setProperty('--background-color', currentPoemColor);
   $: rootDocument?.style.setProperty('--text-color', currentPoemTextColor);
 
+  $: tableOfContents = getTableOfContents(poems);
+
 </script>
 
 {#if poemsLoaded}
+  <TableOfContents items={tableOfContents} />
   <Scroller
     top=0
     threshold=0.5
@@ -117,7 +136,7 @@
     </div>
     <div slot="foreground">
       {#each poems as poem, i}
-        <article class:viewed={i === index}>
+        <article class:viewed={i === index} id={getPoemTarget(poem)}>
           <p class="title">{getTitle(poem)}</p>
           {#if poem?.metadata?.title !== undefined}
             <div class="date">{poem.metadata?.created || ''}</div>
