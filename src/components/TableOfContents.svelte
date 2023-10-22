@@ -1,91 +1,68 @@
 <script>
-  import { onMount } from 'svelte';
-  import { fly } from 'svelte/transition';
+  import { fade } from 'svelte/transition';
 
   export let items = [];
-
   let isOpen = false;
+  function toggle() { isOpen = !isOpen; }
+  function close() { isOpen = false; }
 
-  function toggle() {
-    isOpen = !isOpen;
+  // close the table of contents if the user clicks outside of TOC
+  function handleClick(event) {
+    if (!event.target.closest('.toc') && !event.target.closest('.toc-button')) {
+      close();
+    }
   }
-
-  onMount(() => {
-    const button = document.querySelector('.toc-button');
-    const toc = document.querySelector('.toc');
-
-    button.addEventListener('mouseenter', () => {
-      fly(toc, {
-        y: 10,
-        duration: 200,
-      });
-    });
-
-    button.addEventListener('mouseleave', () => {
-      fly(toc, {
-        y: -10,
-        duration: 200,
-      });
-    });
-  });
 </script>
 
+<svelte:window on:click={handleClick} />
 <button class="toc-button" on:click={toggle}>
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
-    <path d="M0 0h24v24H0z" fill="none"/>
-    <path d="M19 13H5v-2h14v2z"/>
-  </svg>
+  <span>◒</span>
 </button>
 
-<div class="toc" style="display: {isOpen ? 'block' : 'none'};">
-  <ul>
+{#if isOpen}
+  <div class="toc" transition:fade>
     {#each items as item}
-      <li>
-        <a href=#{item.target}>{item.displayName}</a>
-      </li>
+      <div>
+        <a href=#{item.target} class:active={item?.current === true}>{item.displayName}</a>
+      </div>
     {/each}
-  </ul>
-</div>
+  </div>
+{/if}
 
 <style>
+  .toc a.active {
+    text-decoration: underline;
+  }
+
   .toc-button {
     position: fixed;
     top: 20px;
-    left: 20px;
-    z-index: 1000;
-    background-color: white;
-    border: 1px solid #ccc;
-    border-radius: 50%;
+    right: 20px;
+    background-color: var(--text-color);
+    color: var(--background-color);
+    border: none;
+    border-radius: 10px 10px 0 0;
     padding: 10px;
+    z-index: 100;
     cursor: pointer;
   }
 
   .toc {
     position: fixed;
     top: 60px;
-    left: 20px;
-    z-index: 1000;
-    background-color: white;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    right: 20px;
+    background-color: var(--text-color);
+    color: var(--background-color);
+    border-radius: 10px 0px 10px 10px;
     padding: 10px;
     max-height: 300px;
     overflow-y: auto;
-  }
-
-  .toc ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  .toc li {
-    margin: 0;
-    padding: 0;
+    z-index: 100;
+    max-height: calc(100vh - 100px);
   }
 
   .toc a {
-    color: #333;
+    color: var(--background-color);
     text-decoration: none;
   }
 

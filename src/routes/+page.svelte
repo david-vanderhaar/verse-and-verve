@@ -3,9 +3,9 @@
   import { base } from '$app/paths';
   import Scroller from '@sveltejs/svelte-scroller';
   import TableOfContents from '../components/TableOfContents.svelte';
-    import { get } from 'svelte/store';
 
   const PRODUCTION_MODE = process.env.NODE_ENV === 'production';
+  // const PRODUCTION_MODE = true
   const POEM_ENDPOINT = 'https://api.github.com/repos/david-vanderhaar/verse-and-verve-data/contents/poems?ref=main';
 
   let rootDocument;
@@ -56,9 +56,9 @@
       (url) => parsePoemResponse(url)
     );
 
-    
     const result = await Promise.all(poemPromises);
     poems = sortByDateLatest(result);
+    poems = poems.map((poem, index) => ({id: index, ...poem}));
   }
   
   async function fetchPoems() {
@@ -66,10 +66,11 @@
     const data = await response.json();
     const poemPromises = data
       .filter(filterTxtFiles)
-      .map((item) => parsePoemResponse(item.download_url));
+      .map((item) => (parsePoemResponse(item.download_url)));
 
     const result = await Promise.all(poemPromises);
     poems = sortByDateLatest(result);
+    poems = poems.map((poem, index) => ({id: index, ...poem}));
   }
 
   function filterTxtFiles(file) {
@@ -100,12 +101,20 @@
     return getTitle(poem).toLowerCase().replace(/ /g, '-');
   }
 
-  function getTableOfContents(poems) {
-    return poems.map((poem) => ({displayName: getTableOfContentsDisplay(poem), target: getPoemTarget(poem)}));
+  function getTableOfContents(poems, currentPoemId) {
+    console.log('getTableOfContents', currentPoemId);
+    return poems.map((poem) => {
+      return {
+        displayName: getTableOfContentsDisplay(poem), 
+        target: getPoemTarget(poem),
+        current: currentPoemId !== undefined && poem.id === currentPoemId
+      }
+    });
   }
 
   $: poemsLoaded = poems.length > 0;
   $: currentPoem = poems[index];
+  $: currentPoemId = currentPoem?.id;
   $: currentPoemTitle = getTitle(currentPoem);
   $: currentPoemColor = currentPoem?.metadata?.color || '#eadcbd';
   $: currentPoemTextColor = currentPoem?.metadata?.text_color || '#262422';
@@ -114,7 +123,7 @@
   $: rootDocument?.style.setProperty('--background-color', currentPoemColor);
   $: rootDocument?.style.setProperty('--text-color', currentPoemTextColor);
 
-  $: tableOfContents = getTableOfContents(poems);
+  $: tableOfContents = getTableOfContents(poems, currentPoemId);
 
 </script>
 
