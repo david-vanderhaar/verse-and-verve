@@ -1,8 +1,14 @@
 <script>
   import "@fontsource-variable/cormorant";
   import { base } from "$app/paths";
+  import { fade } from "svelte/transition";
+  import Page from "./+page.svelte";
   
+  const FADE_DELAY = 600;
   const year = new Date().getFullYear();
+
+  // on Page poemsLoaded, set pageFadeInReady to true
+  let pageFadeInReady = false;
 </script>
 
 <svelte:head>
@@ -14,17 +20,22 @@
   <link rel="icon" type="image/png" sizes="16x16" href="{base}/favicon/favicon-16x16.png">
   <link rel="icon" href="{base}/favicon/favicon.ico" />
 </svelte:head>
-<header>
-  <h1 style="margin-bottom: 0;">Verse // Verve</h1>
-  <div class="italic">A Collection of Collections of Poetry and other Things</div>
-</header>
-<main>
-  <slot></slot>
-</main>
-<footer>
-  <div class="italic">David Vanderhaar - {year}</div>
-</footer>
 
+{#if pageFadeInReady}
+  <header transition:fade={{delay: FADE_DELAY}}>
+    <h1 style="margin-bottom: 0;">Verse // Verve</h1>
+    <div class="italic">A Collection of Collections of Poetry and other Things</div>
+  </header>
+{/if}
+<main>
+  <slot />
+  <Page on:poemsLoaded={() => pageFadeInReady = true} />
+</main>
+{#if pageFadeInReady}
+  <footer transition:fade={{delay: FADE_DELAY}}>
+    <div class="italic">David Vanderhaar - {year}</div>
+  </footer>
+{/if}
 <style>
   :global(html) {
     font-family: 'Cormorant Variable', serif;

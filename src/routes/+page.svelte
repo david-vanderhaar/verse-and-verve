@@ -1,5 +1,7 @@
 <script>
   import { onMount } from 'svelte';
+  import { createEventDispatcher } from 'svelte';
+  import { fade } from 'svelte/transition';
   import { base } from '$app/paths';
   import Scroller from '@sveltejs/svelte-scroller';
   import TableOfContents from '../components/TableOfContents.svelte';
@@ -7,15 +9,37 @@
   const PRODUCTION_MODE = process.env.NODE_ENV === 'production';
   // const PRODUCTION_MODE = true
   const POEM_ENDPOINT = 'https://api.github.com/repos/david-vanderhaar/verse-and-verve-data/contents/poems?ref=main';
+  const FADE_DELAY = 1000;
+
+  const dispatch = createEventDispatcher();
 
   let rootDocument;
+  let rootWindow;
   let poems = [];
+  let mounted = false;
 
-  onMount(() => {
+  onMount(async () => {
     rootDocument = document.documentElement;
-    if (PRODUCTION_MODE) fetchPoems();
-    else fetchTestPoems();
+    rootWindow = window;
+    if (PRODUCTION_MODE) await fetchPoems();
+    else await fetchTestPoems();
+    if (rootWindow.location.hash) await jumpToPoem(rootWindow.location.hash);
+
+    mounted = true;
   });
+
+  async function jumpToPoem(hash) {
+    if (hash) {
+      const poemId = hash.replace('#', '');
+      const target = document.getElementById(poemId);
+      
+      if (!target) return;
+
+      // return if target already in view
+      if (target.getBoundingClientRect().top < window.innerHeight) return;
+      target.scrollIntoView({behavior: 'instant'});
+    }
+  }
 
   function parseText(text) {
     const poemTextParts = text.split('END_METADATA');
@@ -102,7 +126,6 @@
   }
 
   function getTableOfContents(poems, currentPoemId) {
-    console.log('getTableOfContents', currentPoemId);
     return poems.map((poem) => {
       return {
         displayName: getTableOfContentsDisplay(poem), 
@@ -113,6 +136,7 @@
   }
 
   $: poemsLoaded = poems.length > 0;
+  $: if (poemsLoaded) dispatch('poemsLoaded', { poemsLoaded });
   $: currentPoem = poems[index];
   $: currentPoemId = currentPoem?.id;
   $: currentPoemTitle = getTitle(currentPoem);
@@ -123,38 +147,43 @@
   $: rootDocument?.style.setProperty('--background-color', currentPoemColor);
   $: rootDocument?.style.setProperty('--text-color', currentPoemTextColor);
 
+  // update hash with current poem id if window exists
+  $: if(mounted) rootWindow?.history.replaceState(null, '', `#${getPoemTarget(currentPoem)}`);
+
   $: tableOfContents = getTableOfContents(poems, currentPoemId);
 
 </script>
 
 {#if poemsLoaded}
-  <TableOfContents items={tableOfContents} />
-  <Scroller
-    top=0
-    threshold=0.5
-    bottom=0.9
-    query="article"
-    bind:count
-    bind:index
-    bind:progress
-  >
-    <div slot="background">
-      index: {index}
-      poem: {currentPoemTitle}
-      progress: {progress}
-    </div>
-    <div slot="foreground">
-      {#each poems as poem, i}
-        <article class:viewed={i === index} id={getPoemTarget(poem)}>
-          <p class="title">{getTitle(poem)}</p>
-          {#if poem?.metadata?.title !== undefined}
-            <div class="date">{poem.metadata?.created || ''}</div>
-          {/if}
-          <p class="content">{poem.content}</p>
-        </article>
-      {/each}
-    </div>
-  </Scroller>
+  <div transition:fade={{delay: FADE_DELAY}}>
+    <TableOfContents items={tableOfContents} />
+    <Scroller
+      top=0
+      threshold=0.5
+      bottom=0.9
+      query="article"
+      bind:count
+      bind:index
+      bind:progress
+    >
+      <div slot="background">
+        index: {index}
+        poem: {currentPoemTitle}
+        progress: {progress}
+      </div>
+      <div slot="foreground">
+        {#each poems as poem, i}
+          <article class:viewed={i === index} id={getPoemTarget(poem)}>
+            <p class="title">{getTitle(poem)}</p>
+            {#if poem?.metadata?.title !== undefined}
+              <div class="date">{poem.metadata?.created || ''}</div>
+            {/if}
+            <p class="content">{poem.content}</p>
+          </article>
+        {/each}
+      </div>
+    </Scroller>
+  </div>
 {:else}
   <p>...</p>
 {/if}
