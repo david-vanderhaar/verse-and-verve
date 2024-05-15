@@ -28,7 +28,6 @@
   </header>
 {/if}
 <main>
-  <slot />
   <Page on:poemsLoaded={() => pageFadeInReady = true} />
 </main>
 {#if pageFadeInReady}
