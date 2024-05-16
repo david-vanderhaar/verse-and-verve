@@ -21,12 +21,10 @@
   <link rel="icon" href="{base}/favicon/favicon.ico" />
 </svelte:head>
 
-{#if pageFadeInReady}
-  <header transition:fade={{delay: FADE_DELAY}}>
-    <h1 style="margin-bottom: 0;">Verse // Verve</h1>
-    <div class="italic">A Collection of Collections of Poetry and other Things</div>
-  </header>
-{/if}
+<header>
+  <h1 style="margin-bottom: 0;">Verse // Verve</h1>
+  <div class="italic">A Collection of Collections of Poetry and other Things</div>
+</header>
 <main>
   <Page on:poemsLoaded={() => pageFadeInReady = true} />
 </main>

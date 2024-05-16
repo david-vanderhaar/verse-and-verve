@@ -185,7 +185,9 @@
     </Scroller>
   </div>
 {:else}
-  <p>...</p>
+  <div id="loading-indicator" transition:fade={{delay: FADE_DELAY / 2}}>
+    ◒
+  </div>
 {/if}
 
 <style>
@@ -197,6 +199,15 @@
     flex-direction: column;
     align-items: center;
   }
+
+  #loading-indicator {
+    font-size: 10rem;
+    position: sticky;
+    margin: auto;
+    width: 50%;
+    text-align: center;
+  }
+
   p {
     white-space: pre-wrap;
   }
