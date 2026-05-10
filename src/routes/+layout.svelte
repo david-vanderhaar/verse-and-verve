@@ -2,13 +2,14 @@
   import "@fontsource-variable/cormorant";
   import { base } from "$app/paths";
   import { fade } from "svelte/transition";
-  import Page from "./+page.svelte";
+  import { pageReady } from "../lib/stores/page.js";
   
   const FADE_DELAY = 600;
   const year = new Date().getFullYear();
 
-  // on Page poemsLoaded, set pageFadeInReady to true
+  // subscribe to pageReady store
   let pageFadeInReady = false;
+  pageReady.subscribe(value => pageFadeInReady = value);
 </script>
 
 <svelte:head>
@@ -22,11 +23,11 @@
 </svelte:head>
 
 <header>
-  <h1 style="margin-bottom: 0;">Verse // Verve</h1>
+  <h1 style="margin-bottom: 0;"><a href="{base}/">Verse</a> // <a href="{base}/thoughts">Verve</a></h1>
   <div class="italic">A Collection of Collections of Poetry and other Things</div>
 </header>
 <main>
-  <Page on:poemsLoaded={() => pageFadeInReady = true} />
+  <slot />
 </main>
 {#if pageFadeInReady}
   <footer transition:fade={{delay: FADE_DELAY}}>
