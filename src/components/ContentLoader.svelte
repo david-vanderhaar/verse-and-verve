@@ -157,7 +157,8 @@
   $: rootDocument?.style.setProperty('--font-family', FONT_FAMILY);
   
   // update hash with current poem id if window exists
-  $: if(mounted) rootWindow?.history.replaceState(null, '', `#${getPoemTarget(currentPoem)}`);
+  // $: if(mounted) rootWindow?.history.replaceState(null, '', `#${getPoemTarget(currentPoem)}`);
+  // $: if (mounted && currentPoem) rootWindow?.history.replaceState(null, '', `#${getPoemTarget(currentPoem)}`);
 
   $: tableOfContents = getTableOfContents(poems, currentPoemId);
 
