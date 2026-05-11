@@ -15,6 +15,7 @@
   export let ENDPOINT;
   export let TEST_PATH;
   export let PRODUCTION_MODE;
+  export let CONTENT_WIDTH = '300px';
 
   let rootDocument;
   let rootWindow;
@@ -78,7 +79,6 @@
       `${TEST_PATH}/example4.txt`,
       `${TEST_PATH}/example5.txt`,
     ]
-    console.log(urls);
     
     const poemPromises = urls.map(
       (url) => parsePoemResponse(url)
@@ -150,7 +150,8 @@
   // update background color with current poem color
   $: rootDocument?.style.setProperty('--background-color', currentPoemColor);
   $: rootDocument?.style.setProperty('--text-color', currentPoemTextColor);
-
+  $: rootDocument?.style.setProperty('--content-width', CONTENT_WIDTH);
+  
   // update hash with current poem id if window exists
   $: if(mounted) rootWindow?.history.replaceState(null, '', `#${getPoemTarget(currentPoem)}`);
 
@@ -218,11 +219,17 @@
 
   article {
     margin-bottom: 2rem;
-    width: 300px;
+    width: var(--content-width);
     min-height: 50vh;
     opacity: 0.3;
     transition: all 0.5s ease-in-out;
     transition: color 0.1s ease-in-out;
+  }
+
+  @media (max-width: 800px) {
+    article {
+      width: 90%;
+    }
   }
 
   .viewed {

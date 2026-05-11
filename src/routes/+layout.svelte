@@ -23,8 +23,8 @@
 </svelte:head>
 
 <header>
-  <h1 style="margin-bottom: 0;"><a href="{base}/">Verse</a> // <a href="{base}/thoughts">Verve</a></h1>
-  <div class="italic">A Collection of Collections of Poetry and other Things</div>
+  <h1 style="margin-bottom: 0;">Verse // Verve</h1>
+  <div class="italic">A Collection of Collections of <a href="{base}/">Poetry</a> and <a href="{base}/thoughts">other Things</a></div>
 </header>
 <main>
   <slot />
@@ -50,5 +50,23 @@
 
   header, footer {
     text-align: center;
+  }
+
+  a.active {
+    text-decoration: none;
+  }
+  a {
+    color: var(--text-color);
+    transition: all 0.6s ease-out;
+  }
+
+  a:hover {
+    padding: 8px;
+    font-size: 2rem;
+    text-decoration: none;
+  }
+
+  a:visited {
+    color: var(--text-color);
   }
 </style>
