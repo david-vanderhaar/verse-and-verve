@@ -16,6 +16,9 @@
   export let TEST_PATH;
   export let PRODUCTION_MODE;
   export let CONTENT_WIDTH = '300px';
+  export let FONT_FAMILY = 'Cormorant Variable, serif';
+  export let DEFAULT_BACKGROUND_COLOR = '#eadcbd';
+  export let DEFAULT_TEXT_COLOR = '#262422';
 
   let rootDocument;
   let rootWindow;
@@ -144,13 +147,14 @@
   $: currentPoem = poems[index];
   $: currentPoemId = currentPoem?.id;
   $: currentPoemTitle = getTitle(currentPoem);
-  $: currentPoemColor = currentPoem?.metadata?.color || '#eadcbd';
-  $: currentPoemTextColor = currentPoem?.metadata?.text_color || '#262422';
+  $: currentPoemColor = currentPoem?.metadata?.color || DEFAULT_BACKGROUND_COLOR;
+  $: currentPoemTextColor = currentPoem?.metadata?.text_color || DEFAULT_TEXT_COLOR;
   
   // update background color with current poem color
   $: rootDocument?.style.setProperty('--background-color', currentPoemColor);
   $: rootDocument?.style.setProperty('--text-color', currentPoemTextColor);
   $: rootDocument?.style.setProperty('--content-width', CONTENT_WIDTH);
+  $: rootDocument?.style.setProperty('--font-family', FONT_FAMILY);
   
   // update hash with current poem id if window exists
   $: if(mounted) rootWindow?.history.replaceState(null, '', `#${getPoemTarget(currentPoem)}`);
@@ -224,6 +228,7 @@
     opacity: 0.3;
     transition: all 0.5s ease-in-out;
     transition: color 0.1s ease-in-out;
+    font-family: var(--font-family);
   }
 
   @media (max-width: 800px) {

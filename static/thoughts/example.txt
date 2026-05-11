@@ -1,8 +1,5 @@
 title: What is a Belief?
 created: 2026-05-07
-color: #262422
-text_color: #eadcbd
-END_METADATA
 
 Structure:
 1. Question
@@ -16,43 +13,53 @@ Structure:
   b. Questions and ideas ofr follow-up
 4. Apendix
   a. The sources I concsiously drew on while writing
+END_METADATA
+
+1. What is a Belief and Why Is This Question Worth Asking?
+
+We all believe things. We believe many things. In this sense, it is a shared experience. Beliefs are things we all experience. To understand what they are, what they are for, how they can be gained, changed, lost, dropped and used, may illuminate some facet of us (humans, people, believing beings).
 
 
-1. Question: 
-What is a Belief?
+1a. What Do I Expect To Do With The Conclusion?
 
-1a. Why is this question worth asking:
-We all believe things. We believe many things. In this sense, it is a shared experience. Beliefs are things we all experience. To understand what they are, what they are for, how they can be gained, changed, lost, dropped and used, is to understand some facet of us (humans, people, believing beings).
-
-1b. What do I expect to do with the conclusion?
 I hope to gain some insight into my own beliefs, where they come from, what forces change them or maintain them. I hope, through that lense to better understand my friends and family and collegues and neighbors. To have minute glimpe into how they think, or make decisions, or why they do what they do. 
 
 More broadly I am probably hoping to gain some insight into "how the world works" or rather why it's working like _this_, so seemingly badly. We are at each others throats. I suspect it's because we all think we know what others believe and have judged their beliefs incorrect, or dangerous, or bad. But I don't think we know what we believe much of the time. We only _believe_ that we know.
 
 If any of this is true, maybe sharing this insight will help someone, somewhere _see_ their fellow and judge them more slowly, because they have a certain empathy about the difficulty or mystery of belief.
 
-2. Possible Answers
 
-2a. What are my kneejerk answers or ideas toward the Question?
-What do I think about belief?
+
+2. What Do I Think About Belief?
 
 Beliefs seem to be like a collection of totems. They are things we hold and they are deeply important to us. We hold them close. Though we act on, or with, a belief in hand, they have no agency of their own. We wield them, knowingly or not. I think it's better to know we wield them than not. Perhaps we don't need to know which totem is in hand all of the time. Perhaps it's enough to recognize their presence, their weight, and their practical use. We carry them and wield them regularly. 
 
-WHAT CAN BE DONE WITH A BELIEF?
+
+2a. What Can Be Done With A Belief?
+
 Totems can be given, gifted, rejected, formed, shaped, morphed, dropped, left behind, smashed to pieces, ignored, hidden. We probably do all theses things with out beliefs, our totems, often. And a totem doesn't have to represent a _real_ thing. It could depict a lion or it could depict a chimera. It could depict an iguana or it could depict a dragon. The totem is real in either case and it's important to recognize that. Because seeing the shape of it, the image it impart, frames one's reality. An image can limit reality, or expand it, or clarify it. Likewise, a belief  can imply, to the believer, what's possible or what's not possible. What's good or bad. What's real or surreal. What is true or false. Beliefs can be in harmony or conflict with one another.
 
 As one person relates to another, beliefs are also tools. They can be used to build relationships and communities, out of which real buildings and services and support systems, and opportunities, and innovations are made. They have utility and are practical for the human. But tools can fall into disrepair, or be unwieldy, or be dangerous, needing caution, needing instruction.
 
-HOW DO WE RELATE TO THEM?
+
+2b. How Do We Relate To Beliefs?
+
 We have a lot of totems. More than we know. Many of them we inherited and lay in a dusty attic, or earthen pot. Some sit on the family bookshelf or are lodged deep between kitchen cabinets. Beliefs can be found anywhere. Some we are given at school. Some emerge from the pages of a book, or the images on a screen. Some lay very close to our body, but hidden in the lining of your coat, fallen through the hole in your pocket. We all believe things. We believe many things. We are not aware of every belief we possess, let alone what beliefs others possess. But we move through the world with them regardless.
 
-HOW SHOULD WE RELATE TO THEM?
+
+2c. How Should We Relate To Beliefs?
+
 There are times and places in human life where beliefs are more important, whey they are weilded in ceremony or expectation. Religious practices and rituals are, perhaps, most obvious. It may help to discover where else or when else a belief is present. Maybe it's helpful to catch ourselves in the act of interacting with our own beliefs. Girded with that practice we might recognize it in others, giving them grace in conflict, or recieving delight in the harmony. the same grace we'd extend to ourselves, the same harmony we experience while listening to a moving sermon.
 
-REFERENCES/INSPIRATION
-* The Practicality of Morals, Wendell Berry
 
-BRAIN DUMP
+
+APPENDIX: 
+
+A. References/Inspiration
+* The Practicality of Morals, Wendell Berry
+* a bunch of other stuff I can't recall right now.
+
+B. Brain Dump
 * We all believe things, or we all have beliefs.
 * We believe many things.
 * We take many beliefs for granted.
@@ -97,5 +104,3 @@ BRAIN DUMP
 * It is important to understand others don't necessarilly know what they believe. 
 * One might gain insight if they can catch a belief in the act.
 * It would be good to _gently_ help others do the same.
-
-
