@@ -16,6 +16,7 @@
   export let TEST_PATH;
   export let PRODUCTION_MODE;
   export let CONTENT_WIDTH = '300px';
+  export let CONTENT_FONT_SIZE = '1.5rem';
   export let FONT_FAMILY = 'Cormorant Variable, serif';
   export let DEFAULT_BACKGROUND_COLOR = '#eadcbd';
   export let DEFAULT_TEXT_COLOR = '#262422';
@@ -154,6 +155,7 @@
   $: rootDocument?.style.setProperty('--background-color', currentPoemColor);
   $: rootDocument?.style.setProperty('--text-color', currentPoemTextColor);
   $: rootDocument?.style.setProperty('--content-width', CONTENT_WIDTH);
+  $: rootDocument?.style.setProperty('--content-font-size', CONTENT_FONT_SIZE);
   $: rootDocument?.style.setProperty('--font-family', FONT_FAMILY);
   
   // update hash with current poem id if window exists
@@ -249,7 +251,7 @@
   }
 
   .content {
-    font-size: 1.5rem;
+    font-size: var(--content-font-size);
   }
 
   .date {

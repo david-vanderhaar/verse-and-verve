@@ -1,5 +1,6 @@
 <script>
   import "@fontsource-variable/cormorant";
+  import "@fontsource/ibm-plex-serif";
   import { base } from "$app/paths";
   import { fade } from "svelte/transition";
   import { pageReady } from "../lib/stores/page.js";

@@ -7,6 +7,10 @@ settings:
 importers:
 
   .:
+    dependencies:
+      '@fontsource/ibm-plex-serif':
+        specifier: ^5.2.7
+        version: 5.2.7
     devDependencies:
       '@fontsource-variable/cormorant':
         specifier: ^5.0.9
@@ -170,6 +174,9 @@ packages:
 
   '@fontsource-variable/cormorant@5.2.8':
     resolution: {integrity: sha512-fcBJbUH/ZGA3mhHo6fNnsG+1sfPHn0rAVNUI7MftF34XeevTjcKUw00qus+leFSaVuZc/x9ZaB7AAlDiQagBKQ==}
+
+  '@fontsource/ibm-plex-serif@5.2.7':
+    resolution: {integrity: sha512-04owmc2OQQ/DAMjXjEMJc+7V4dBVmR01aIFOg4cuqS8pQ4HbvtlYs/u6+O0vCt21EMx5M/azIbgx43iKyisEOA==}
 
   '@jridgewell/sourcemap-codec@1.5.5':
     resolution: {integrity: sha512-cYQ9310grqxueWbl+WuIUIaiUaDcj7WOq5fVhEljNVgRfOUhY9fy2zTvfoqWsnebh8Sl70VScFbICvJnLKB0Og==}
@@ -587,6 +594,8 @@ snapshots:
   '@fastify/busboy@2.1.1': {}
 
   '@fontsource-variable/cormorant@5.2.8': {}
+
+  '@fontsource/ibm-plex-serif@5.2.7': {}
 
   '@jridgewell/sourcemap-codec@1.5.5': {}
 

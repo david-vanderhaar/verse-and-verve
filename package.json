@@ -17,5 +17,8 @@
     "gh-pages": "^5.0.0",
     "svelte": "^3.59.1",
     "vite": "^4.3.8"
+  },
+  "dependencies": {
+    "@fontsource/ibm-plex-serif": "^5.2.7"
   }
 }
