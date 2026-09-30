@@ -19,6 +19,7 @@
     "vite": "^4.3.8"
   },
   "dependencies": {
-    "@fontsource/ibm-plex-serif": "^5.2.7"
+    "@fontsource/ibm-plex-serif": "^5.2.7",
+    "svelte-markdown": "^0.4.1"
   }
 }

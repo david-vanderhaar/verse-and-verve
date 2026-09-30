@@ -4,6 +4,7 @@
   import { fade } from 'svelte/transition';
   import { base } from '$app/paths';
   import Scroller from '@sveltejs/svelte-scroller';
+  import SvelteMarkdown from 'svelte-markdown'
   import TableOfContents from './TableOfContents.svelte';
   import { pageReady } from '../lib/stores/page.js';
 
@@ -80,7 +81,7 @@
       `${TEST_PATH}/example.txt`,
       `${TEST_PATH}/example2.txt`,
       `${TEST_PATH}/example3.txt`,
-      `${TEST_PATH}/example4.txt`,
+      `${TEST_PATH}/example4.md`,
       `${TEST_PATH}/example5.txt`,
     ]
     
@@ -97,7 +98,7 @@
     const response = await fetch(ENDPOINT);
     const data = await response.json();
     const poemPromises = data
-      .filter(filterTxtFiles)
+      .filter(filterTxtAndMdFiles)
       .map((item) => (parsePoemResponse(item.download_url)));
 
     const result = await Promise.all(poemPromises);
@@ -107,6 +108,14 @@
 
   function filterTxtFiles(file) {
     return file.name.endsWith('.txt');
+  }
+
+  function filterMdFiles(file) {
+    return file.name.endsWith('.md');
+  }
+
+  function filterTxtAndMdFiles(file) {
+    return filterTxtFiles(file) || filterMdFiles(file);
   }
 
   async function parsePoemResponse(url) {
@@ -185,13 +194,22 @@
       </div>
       <div slot="foreground">
         {#each poems as poem, i}
-          <article class:viewed={i === index} id={getPoemTarget(poem)}>
-            <p class="title">{getTitle(poem)}</p>
-            {#if poem?.metadata?.title !== undefined}
-              <div class="date">{poem.metadata?.created || ''}</div>
-            {/if}
-            <p class="content">{poem.content}</p>
-          </article>
+          {#if poem?.metadata?.file_type?.includes('markdown')}
+            <article class:viewed={i === index} id={getPoemTarget(poem)}>
+              <SvelteMarkdown
+                class="content"
+                source={poem.content}
+              />
+            </article>
+          {:else}
+            <article class:viewed={i === index} id={getPoemTarget(poem)}>
+              <p class="title">{getTitle(poem)}</p>
+              {#if poem?.metadata?.title !== undefined}
+                <div class="date">{poem.metadata?.created || ''}</div>
+              {/if}
+              <p class="content">{poem.content}</p>
+            </article>
+          {/if}
         {/each}
       </div>
     </Scroller>
